@@ -1,0 +1,14 @@
+{
+  "name": "Cave du Rezhin",
+  "short_name": "Cave",
+  "description": "Reperage des caisses de vin — plan de la cave a l'echelle",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#191510",
+  "theme_color": "#191510",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
