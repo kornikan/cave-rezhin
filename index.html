@@ -15,10 +15,21 @@
   <style>
     html, body, #root { margin: 0; padding: 0; min-height: 100%; background: #191510; }
     body { padding-top: env(safe-area-inset-top); }
+    #splash { min-height: 100vh; display: grid; place-items: center; color: #9c9080;
+      font-family: system-ui, -apple-system, sans-serif; text-align: center; }
+    #splash .mark { font-size: 30px; color: #d6a24a; margin-bottom: 10px; }
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <!-- ecran de chargement visible : jamais d'ecran noir muet -->
+  <div id="root">
+    <div id="splash">
+      <div>
+        <div class="mark">◎</div>
+        Cave du Rezhin<br />chargement…
+      </div>
+    </div>
+  </div>
   <script>
     // Persistance : shim window.storage -> localStorage (meme API que l'artefact Claude)
     window.storage = {
@@ -28,6 +39,13 @@
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
     }
+    // filet de securite : si l'app n'a pas demarre en 6 s, on recharge une fois
+    setTimeout(function () {
+      if (document.getElementById("splash") && !sessionStorage.getItem("cave_retry")) {
+        sessionStorage.setItem("cave_retry", "1");
+        location.reload();
+      }
+    }, 6000);
   </script>
   <script src="app.js"></script>
 </body>
